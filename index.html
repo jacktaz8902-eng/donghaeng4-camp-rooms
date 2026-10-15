@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#F3F5F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#101411" media="(prefers-color-scheme: dark)">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="방 배정">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233F6B4E'/%3E%3Cpath d='M18 30 32 18l14 12v16H18z' fill='none' stroke='white' stroke-width='4' stroke-linejoin='round'/%3E%3C/svg%3E">
+<title>동행캠프 4기 방 배정</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ground:#F3F5F2;--card:#FFFFFF;--card-2:#F8FAF7;
+  --ink:#171C18;--ink-2:#535C55;--ink-3:#8A938C;
+  --line:#E0E5E0;--line-strong:#CBD3CC;
+  --accent:#3F6B4E;--accent-wash:#E7F0E9;--bad:#B3261E;
+  --shadow:0 1px 2px rgba(23,28,24,.05),0 8px 22px -16px rgba(23,28,24,.35);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#101411;--card:#181D19;--card-2:#1D231E;
+    --ink:#E6ECE7;--ink-2:#A8B2AA;--ink-3:#77817A;
+    --line:#29302A;--line-strong:#3B443D;
+    --accent:#93C9A2;--accent-wash:#1F3326;--bad:#F2B8B5;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 26px -18px rgba(0,0,0,.9);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#101411;--card:#181D19;--card-2:#1D231E;
+  --ink:#E6ECE7;--ink-2:#A8B2AA;--ink-3:#77817A;
+  --line:#29302A;--line-strong:#3B443D;
+  --accent:#93C9A2;--accent-wash:#1F3326;--bad:#F2B8B5;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 26px -18px rgba(0,0,0,.9);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--ground);color:var(--ink);
+  font-family:"IBM Plex Sans KR","Malgun Gothic",system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;
+  -webkit-tap-highlight-color:transparent;overscroll-behavior-y:none}
+.wrap{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:30px;
+  padding:0 max(16px,env(safe-area-inset-right)) max(60px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
+[hidden]{display:none!important}
+
+header{padding-top:52px;display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.eyebrow{margin:0;font-family:"IBM Plex Mono","IBM Plex Sans KR",monospace;font-size:12px;letter-spacing:.14em;font-weight:500;color:var(--accent)}
+h1{margin:0;font-size:clamp(28px,6vw,38px);font-weight:600;letter-spacing:-.02em;line-height:1.25;text-wrap:balance}
+.lede{margin:0;max-width:34em;color:var(--ink-2);font-size:15px;font-weight:300;word-break:keep-all}
+.tally{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.tally b{font-size:12.5px;font-weight:400;color:var(--ink-2);background:var(--card);border:1px solid var(--line);padding:4px 11px;border-radius:99px}
+.tally b i{font-style:normal;font-family:"IBM Plex Mono",monospace;font-weight:600;color:var(--ink);margin-right:5px}
+
+/* 잠금 */
+.lock{background:var(--card);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);padding:28px 22px;display:flex;flex-direction:column;gap:14px}
+.lock h2{margin:0;font-size:17px;font-weight:600}
+.lock p{margin:0;font-size:13.5px;color:var(--ink-2);font-weight:300;word-break:keep-all}
+.pinrow{display:flex;gap:8px}
+.pin{flex:1;min-width:0;font-family:"IBM Plex Mono",monospace;font-size:24px;letter-spacing:.5em;text-align:center;
+  padding:12px;border:1px solid var(--line-strong);border-radius:8px;background:var(--card-2);color:var(--ink);outline:none}
+.pin:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-wash)}
+.btn{border:0;border-radius:8px;padding:0 20px;min-height:52px;background:var(--accent);color:var(--card);font-family:inherit;font-size:15px;font-weight:600;cursor:pointer}
+.btn:disabled{opacity:.55;cursor:default}
+.lock .err{color:var(--bad);font-weight:400;min-height:1.4em}
+
+/* 검색 */
+.app{display:flex;flex-direction:column;gap:30px}
+.search label{display:block;font-size:12.5px;font-weight:500;color:var(--ink-2);margin-bottom:8px}
+.box{display:flex;align-items:center;gap:11px;background:var(--card);border:1px solid var(--line-strong);border-radius:8px;padding:0 15px}
+.box:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-wash)}
+.box svg{flex:0 0 17px;width:17px;height:17px;stroke:var(--ink-3);fill:none;stroke-width:1.8;stroke-linecap:round}
+input[type="search"]{flex:1;min-width:0;appearance:none;-webkit-appearance:none;background:transparent;border:0;outline:none;padding:14px 0;margin:0;color:var(--ink);font-family:inherit;font-size:17px;font-weight:500}
+input[type="search"]::placeholder{color:var(--ink-3);font-weight:400}
+input[type="search"]::-webkit-search-cancel-button{display:none}
+.clear{flex:0 0 auto;display:none;align-items:center;justify-content:center;width:32px;height:32px;margin-right:-8px;border:0;border-radius:50%;background:var(--card-2);color:var(--ink-2);font-size:16px;cursor:pointer}
+.box.has .clear{display:flex}
+.hint{margin:10px 0 0;font-size:12.5px;color:var(--ink-3);font-weight:300;word-break:keep-all}
+.hint code{font-family:"IBM Plex Mono","IBM Plex Sans KR",monospace;font-size:12px;color:var(--ink-2);background:var(--card-2);border:1px solid var(--line);padding:1px 5px;border-radius:3px}
+
+.results{display:flex;flex-direction:column;gap:12px;min-height:150px}
+.state{border:1px solid var(--line);border-radius:8px;padding:40px 20px;text-align:center;color:var(--ink-3);font-size:14px;font-weight:300;background:var(--card-2);word-break:keep-all}
+.state strong{display:block;font-weight:500;font-size:15px;color:var(--ink-2);margin-bottom:5px}
+.count{margin:0;font-size:12.5px;color:var(--ink-3)}
+
+.row{display:grid;grid-template-columns:116px 1fr;background:var(--card);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);overflow:hidden}
+.room{background:var(--accent-wash);border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:22px 8px;gap:6px}
+.room .num{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:38px;line-height:1;color:var(--accent);letter-spacing:-.02em}
+.room .unit{font-size:14px;font-weight:500;color:var(--accent)}
+.room .sex{font-size:11.5px;color:var(--ink-2);border:1px solid var(--line-strong);border-radius:99px;padding:0 8px;background:var(--card)}
+.who{padding:18px 20px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.who .me{display:flex;flex-direction:column;gap:1px}
+.who .nm{margin:0;font-size:21px;font-weight:600;letter-spacing:-.01em;line-height:1.3}
+.who .nm mark{background:var(--accent-wash);color:var(--accent);padding:0 2px;border-radius:2px}
+.who .org{margin:0;font-size:13px;color:var(--ink-3)}
+.mates h3{margin:0 0 6px;font-size:12px;font-weight:500;color:var(--ink-3);letter-spacing:.04em}
+.mates ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:2px}
+.mates li{display:flex;align-items:baseline;gap:8px;font-size:15px;padding:5px 0;border-top:1px dashed var(--line)}
+.mates li:first-child{border-top:0}
+.mates li b{font-weight:500;color:var(--ink)}
+.mates li span{font-size:12.5px;color:var(--ink-3)}
+.mates li.self b{color:var(--accent)}
+.mates li.self::after{content:"나";margin-left:auto;font-size:11px;color:var(--accent);border:1px solid var(--accent);border-radius:99px;padding:0 7px}
+
+.board summary{cursor:pointer;list-style:none;display:flex;align-items:center;min-height:48px;font-size:14.5px;font-weight:500;padding:13px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.board summary::-webkit-details-marker{display:none}
+.board summary::after{content:"＋";margin-left:auto;color:var(--ink-3)}
+.board[open] summary::after{content:"－"}
+.grid{display:grid;gap:8px;margin-top:16px;grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+.cell{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 13px;cursor:pointer;text-align:left;font-family:inherit;color:inherit}
+.cell:hover{border-color:var(--line-strong)}
+.cell b{font-family:"IBM Plex Mono",monospace;color:var(--accent);font-size:16px;font-weight:600}
+.cell b small{font-family:"IBM Plex Sans KR",sans-serif;font-size:12px;margin-left:1px}
+.cell em{font-style:normal;font-size:11.5px;color:var(--ink-3);margin-left:6px}
+.cell div{font-size:13.5px;color:var(--ink-2);margin-top:2px;word-break:keep-all}
+
+footer{border-top:1px solid var(--line);padding-top:16px;font-size:12px;color:var(--ink-3);font-weight:300;line-height:1.85;word-break:keep-all}
+footer b{font-weight:500;color:var(--ink-2)}
+
+@media (max-width:520px){
+  header{padding-top:max(28px,env(safe-area-inset-top));gap:8px}
+  h1{font-size:28px}
+  .lede{font-size:14px}
+  .wrap,.app{gap:22px}
+  .lock{padding:22px 18px}
+  .pin{font-size:26px;padding:14px 8px}
+  .search{position:sticky;top:0;z-index:5;margin:0 -16px;padding:10px 16px 12px;
+    padding-top:max(10px,env(safe-area-inset-top));background:var(--ground)}
+  .search label{display:none}
+  .hint{margin-top:8px;font-size:12px}
+  input[type="search"]{font-size:18px;padding:15px 0}
+  .results{min-height:0}
+  .state{padding:30px 16px}
+  .row{grid-template-columns:88px 1fr}
+  .room{padding:18px 4px}
+  .room .num{font-size:34px}
+  .who{padding:16px}
+  .grid{grid-template-columns:1fr 1fr;gap:7px}
+  .cell{padding:10px 12px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">국세청 동행캠프 4기 · 계룡산 트레킹 10.22–10.23</p>
+    <h1>방 배정 조회</h1>
+    <p class="lede">성함을 검색하면 내 방 번호와 같은 방(조) 분들을 확인할 수 있습니다. 숙소는 부여 롯데리조트입니다.</p>
+    <div class="tally" id="tally" hidden>
+      <b><i id="tPeople">—</i>명</b>
+      <b><i id="tRooms">—</i>개 방</b>
+    </div>
+  </header>
+
+  <form class="lock" id="lock" autocomplete="off">
+    <h2>비밀번호를 입력해 주세요</h2>
+    <p>참가자 개인정보 보호를 위해 비밀번호가 있어야 명단을 볼 수 있습니다.</p>
+    <div class="pinrow">
+      <input class="pin" id="pin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="8" aria-label="비밀번호" autofocus>
+      <button class="btn" id="go" type="submit">확인</button>
+    </div>
+    <p class="err" id="err" role="alert"></p>
+  </form>
+
+  <div class="app" id="app" hidden>
+    <section class="search">
+      <label for="q">이름 검색</label>
+      <div class="box">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="9" cy="9" r="6"></circle><path d="M13.5 13.5 17 17"></path></svg>
+        <input id="q" type="search" enterkeyhint="search" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="성함을 입력하세요">
+        <button class="clear" id="clear" type="button" aria-label="지우기">✕</button>
+      </div>
+      <p class="hint">초성(<code>ㄱㅈㅅ</code>)이나 방 번호(<code>7</code>)로도 검색됩니다.</p>
+    </section>
+
+    <section class="results" id="results" aria-live="polite"></section>
+
+    <details class="board">
+      <summary>전체 방 배정표</summary>
+      <div class="grid" id="grid"></div>
+    </details>
+  </div>
+
+  <footer>
+    방 번호는 <b>동행캠프 4기 방배정 명단</b> 기준이며, 실제 호실은 현장에서 안내합니다. 배정이 다르면 운영진에게 알려 주세요.<br>
+    개인정보 보호를 위해 이름·소속·방 번호 외의 정보는 담지 않았습니다.
+  </footer>
+</div>
+
+<script>
+const BLOB = {"s":"fy2NtPHJPRy5salABB/P5A==","i":"/b8HFgWp71Y3FNh1O+o9ww==","c":"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"};
+const KEY = "donghaeng4-pin";
+const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+
+async function unlock(pin){
+  const base = await crypto.subtle.importKey("raw", new TextEncoder().encode(pin), "PBKDF2", false, ["deriveKey"]);
+  const key = await crypto.subtle.deriveKey(
+    { name:"PBKDF2", salt:b64(BLOB.s), iterations:600000, hash:"SHA-256" },
+    base, { name:"AES-CBC", length:256 }, false, ["decrypt"]);
+  const plain = await crypto.subtle.decrypt({ name:"AES-CBC", iv:b64(BLOB.i) }, key, b64(BLOB.c));
+  return JSON.parse(new TextDecoder().decode(plain));
+}
+
+const lockEl = document.getElementById("lock"), pinEl = document.getElementById("pin"),
+      errEl = document.getElementById("err"), goEl = document.getElementById("go");
+let busy = false;
+
+async function tryPin(pin, silent){
+  if (busy) return;
+  busy = true; goEl.disabled = true; errEl.textContent = silent ? "" : "확인 중…";
+  try {
+    const rooms = await unlock(pin);
+    try { sessionStorage.setItem(KEY, pin); } catch (e) {}
+    start(rooms);
+  } catch (e) {
+    errEl.textContent = silent ? "" : "비밀번호가 맞지 않습니다.";
+    pinEl.value = ""; pinEl.focus();
+  } finally { busy = false; goEl.disabled = false; }
+}
+lockEl.addEventListener("submit", e => { e.preventDefault(); if (pinEl.value.trim()) tryPin(pinEl.value.trim()); });
+pinEl.addEventListener("input", () => { if (pinEl.value.length === 4) tryPin(pinEl.value); });
+try { const saved = sessionStorage.getItem(KEY); if (saved) tryPin(saved, true); } catch (e) {}
+
+const CHO = ["ㄱ","ㄲ","ㄴ","ㄷ","ㄸ","ㄹ","ㅁ","ㅂ","ㅃ","ㅅ","ㅆ","ㅇ","ㅈ","ㅉ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"];
+const toCho = s => [...s].map(ch => { const c = ch.charCodeAt(0) - 0xAC00; return c >= 0 && c < 11172 ? CHO[Math.floor(c / 588)] : ch; }).join("");
+const isCho = q => q.length > 0 && [...q].every(ch => CHO.includes(ch));
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function start(rooms){
+  lockEl.hidden = true;
+  document.getElementById("app").hidden = false;
+  document.getElementById("tally").hidden = false;
+
+  // rooms: [{ r: 방번호, g: 성별, m: [{ n: 이름, o: 소속 }] }]
+  const people = rooms.flatMap(room => room.m.map(p => ({ ...p, room })));
+  document.getElementById("tPeople").textContent = people.length;
+  document.getElementById("tRooms").textContent = rooms.length;
+
+  const resultsEl = document.getElementById("results"), qEl = document.getElementById("q");
+
+  document.getElementById("grid").innerHTML = rooms.map(r =>
+    '<button type="button" class="cell" data-r="' + r.r + '"><b>' + r.r + '<small>번 방</small></b><em>' + esc(r.g) + " · " + r.m.length + "명</em>" +
+    "<div>" + r.m.map(p => esc(p.n)).join(" · ") + "</div></button>").join("");
+  document.getElementById("grid").addEventListener("click", e => {
+    const c = e.target.closest(".cell"); if (!c) return;
+    qEl.value = c.dataset.r; update();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  const mark = (name, q) => {
+    if (!q) return esc(name);
+    const i = isCho(q) ? toCho(name).indexOf(q) : name.indexOf(q);
+    if (i < 0) return esc(name);
+    return esc(name.slice(0, i)) + "<mark>" + esc(name.slice(i, i + q.length)) + "</mark>" + esc(name.slice(i + q.length));
+  };
+  const roomBox = room =>
+    '<div class="room"><span class="num">' + room.r + '</span><span class="unit">번 방</span><span class="sex">' + esc(room.g) + " · " + room.m.length + "명</span></div>";
+  const mateList = (room, self) =>
+    '<div class="mates"><h3>' + (self ? "같은 방(조) 분들" : "방 인원") + "</h3><ul>" +
+    room.m.map(m => '<li class="' + (m === self ? "self" : "") + '"><b>' + esc(m.n) + "</b><span>" + esc(m.o) + "</span></li>").join("") +
+    "</ul></div>";
+  const personRow = (p, q) =>
+    '<div class="row">' + roomBox(p.room) +
+    '<div class="who"><div class="me"><p class="nm">' + mark(p.n, q) + '</p><p class="org">' + esc(p.o) + "</p></div>" +
+    mateList(p.room, p) + "</div></div>";
+  const roomRow = room =>
+    '<div class="row">' + roomBox(room) + '<div class="who">' + mateList(room, null) + "</div></div>";
+
+  function render(){
+    const q = qEl.value.replace(/\s+/g, "");
+    if (!q){
+      resultsEl.innerHTML = '<div class="state"><strong>이름을 입력해 주세요</strong>내 방 번호와 같은 방 분들이 바로 표시됩니다.</div>';
+      return;
+    }
+    const rm = q.match(/^(\d{1,3})(번)?(방)?$/);
+    if (rm){
+      const room = rooms.find(r => r.r === Number(rm[1]));
+      resultsEl.innerHTML = room
+        ? roomRow(room)
+        : '<div class="state"><strong>' + esc(rm[1]) + '번 방은 없습니다</strong>방 번호는 1번부터 ' + rooms.length + "번까지입니다.</div>";
+      return;
+    }
+    const hits = people.filter(p => isCho(q) ? toCho(p.n).includes(q) : p.n.includes(q));
+    resultsEl.innerHTML = hits.length
+      ? (hits.length > 1 ? '<p class="count">' + hits.length + "명 검색됨</p>" : "") + hits.map(p => personRow(p, q)).join("")
+      : '<div class="state"><strong>‘' + esc(q) + '’ 님을 찾지 못했습니다</strong>성함을 다시 확인하시거나 운영진에게 문의해 주세요.</div>';
+  }
+  const boxEl = qEl.parentElement;
+  const update = () => { boxEl.classList.toggle("has", qEl.value.length > 0); render(); };
+  qEl.addEventListener("input", update);
+  // 검색 키를 누르면 키보드를 내려 결과가 화면에 보이게 한다
+  qEl.addEventListener("keydown", e => { if (e.key === "Enter") qEl.blur(); });
+  document.getElementById("clear").addEventListener("click", () => { qEl.value = ""; update(); qEl.focus(); });
+  update();
+  qEl.focus();
+}
+</script>
+</body>
+</html>
