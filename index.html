@@ -149,7 +149,7 @@ footer b{font-weight:500;color:var(--ink-2)}
   <header>
     <p class="eyebrow">국세청 동행캠프 4기 · 계룡산 트레킹 10.22–10.23</p>
     <h1>방 배정 조회</h1>
-    <p class="lede">성함을 검색하면 내 방 번호와 같은 방(조) 분들을 확인할 수 있습니다. 숙소는 부여 롯데리조트입니다.</p>
+    <p class="lede">성함을 검색하면 내 호실과 같은 방(조) 분들을 확인할 수 있습니다. 숙소는 부여 롯데리조트입니다.</p>
     <div class="tally" id="tally" hidden>
       <b><i id="tPeople">—</i>명</b>
       <b><i id="tRooms">—</i>개 방</b>
@@ -174,7 +174,7 @@ footer b{font-weight:500;color:var(--ink-2)}
         <input id="q" type="search" enterkeyhint="search" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="성함을 입력하세요">
         <button class="clear" id="clear" type="button" aria-label="지우기">✕</button>
       </div>
-      <p class="hint">초성(<code>ㄱㅈㅅ</code>)이나 방 번호(<code>7</code>)로도 검색됩니다.</p>
+      <p class="hint">초성(<code>ㄱㅈㅅ</code>), 호실(<code>0319</code>), 방 번호(<code>7</code>)로도 검색됩니다.</p>
     </section>
 
     <section class="results" id="results" aria-live="polite"></section>
@@ -186,13 +186,13 @@ footer b{font-weight:500;color:var(--ink-2)}
   </div>
 
   <footer>
-    방 번호는 <b>동행캠프 4기 방배정 명단</b> 기준이며, 실제 호실은 현장에서 안내합니다. 배정이 다르면 운영진에게 알려 주세요.<br>
-    개인정보 보호를 위해 이름·소속·방 번호 외의 정보는 담지 않았습니다.
+    호실은 <b>롯데리조트 부여 최종 명단</b> 기준입니다. 배정이 다르면 운영진에게 알려 주세요.<br>
+    개인정보 보호를 위해 이름·소속·호실 외의 정보(연락처 등)는 담지 않았습니다.
   </footer>
 </div>
 
 <script>
-const BLOB = {"s":"kapsBU2uPzGA86E+H2Y4LQ==","i":"H18JWoPRsJ/14rlQ6D5tTw==","c":"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"};
+const BLOB = {"s":"RThzR0pqVD57HeIvmZ0kjg==","i":"Vy/dTwliw19mJvtmrUBZng==","c":"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"};
 const KEY = "donghaeng4-pin";
 const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
 
@@ -235,7 +235,7 @@ function start(rooms){
   document.getElementById("app").hidden = false;
   document.getElementById("tally").hidden = false;
 
-  // rooms: [{ r: 방번호, g: 성별, m: [{ n: 이름, o: 소속 }] }]
+  // rooms: [{ r: 방번호, h: 호실, g: 성별, m: [{ n: 이름, o: 소속 }] }]
   const people = rooms.flatMap(room => room.m.map(p => ({ ...p, room })));
   document.getElementById("tPeople").textContent = people.length;
   document.getElementById("tRooms").textContent = rooms.length;
@@ -243,7 +243,7 @@ function start(rooms){
   const resultsEl = document.getElementById("results"), qEl = document.getElementById("q");
 
   document.getElementById("grid").innerHTML = rooms.map(r =>
-    '<button type="button" class="cell" data-r="' + r.r + '"><b>' + r.r + '<small>번 방</small></b><em>' + esc(r.g) + " · " + r.m.length + "명</em>" +
+    '<button type="button" class="cell" data-r="' + r.r + '"><b>' + esc(r.h) + '<small>호</small></b><em>' + r.r + "번 방 · " + esc(r.g) + " " + r.m.length + "명</em>" +
     "<div>" + r.m.map(p => esc(p.n)).join(" · ") + "</div></button>").join("");
   document.getElementById("grid").addEventListener("click", e => {
     const c = e.target.closest(".cell"); if (!c) return;
@@ -258,7 +258,7 @@ function start(rooms){
     return esc(name.slice(0, i)) + "<mark>" + esc(name.slice(i, i + q.length)) + "</mark>" + esc(name.slice(i + q.length));
   };
   const roomBox = room =>
-    '<div class="room"><span class="num">' + room.r + '</span><span class="unit">번 방</span><span class="sex">' + esc(room.g) + " · " + room.m.length + "명</span></div>";
+    '<div class="room"><span class="num">' + esc(room.h) + '</span><span class="unit">호</span><span class="sex">' + room.r + "번 방 · " + esc(room.g) + " " + room.m.length + "명</span></div>";
   const mateList = (room, self) =>
     '<div class="mates"><h3>' + (self ? "같은 방(조) 분들" : "방 인원") + "</h3><ul>" +
     room.m.map(m => '<li class="' + (m === self ? "self" : "") + '"><b>' + esc(m.n) + "</b><span>" + esc(m.o) + "</span></li>").join("") +
@@ -273,15 +273,17 @@ function start(rooms){
   function render(){
     const q = qEl.value.replace(/\s+/g, "");
     if (!q){
-      resultsEl.innerHTML = '<div class="state"><strong>이름을 입력해 주세요</strong>내 방 번호와 같은 방 분들이 바로 표시됩니다.</div>';
+      resultsEl.innerHTML = '<div class="state"><strong>이름을 입력해 주세요</strong>내 호실과 같은 방 분들이 바로 표시됩니다.</div>';
       return;
     }
-    const rm = q.match(/^(\d{1,3})(번)?(방)?$/);
+    // 1~2자리는 방 번호(1~19), 3~4자리 또는 '호'가 붙으면 호실(0319)로 찾는다
+    const rm = q.match(/^(\d{1,4})(번|호실?)?(방)?$/);
     if (rm){
-      const room = rooms.find(r => r.r === Number(rm[1]));
+      const n = Number(rm[1]), byRoomNo = rm[1].length <= 2 && rm[2] !== "호" && rm[2] !== "호실";
+      const room = rooms.find(r => byRoomNo ? r.r === n : Number(r.h) === n);
       resultsEl.innerHTML = room
         ? roomRow(room)
-        : '<div class="state"><strong>' + esc(rm[1]) + '번 방은 없습니다</strong>방 번호는 1번부터 ' + rooms.length + "번까지입니다.</div>";
+        : '<div class="state"><strong>' + esc(rm[1]) + (byRoomNo ? '번 방' : '호') + '은 없습니다</strong>호실 또는 방 번호(1~' + rooms.length + "번)를 다시 확인해 주세요.</div>";
       return;
     }
     const hits = people.filter(p => isCho(q) ? toCho(p.n).includes(q) : p.n.includes(q));
